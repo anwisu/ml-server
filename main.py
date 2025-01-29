@@ -24,7 +24,7 @@ class PredictProgress(BaseModel):
 def read_root():
     return {"message": "Welcome to the FastAPI Model API!"}
 
-@app.post("/predict/student_progress")
+@app.post("/eip/student_progress")
 def predict(request: PredictProgress):
     try:
         predictions = {}
