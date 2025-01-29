@@ -10,10 +10,10 @@ app = FastAPI()
 
 # Load your model
 try:
-    domain1 = joblib.load("app/domains/domain1.pkl");
-    domain2 = joblib.load("app/domains/domain2.pkl");
-    domain3 = joblib.load("app/domains/domain3.pkl");
-    domain4 = joblib.load("app/domains/domain4.pkl");
+    literacy_model  = joblib.load("domains/EIP/domain1-literacy-model.pkl")
+    numeracy_model  = joblib.load("domains/EIP/domain2-numeracy-model.pkl")
+    fine_motor_model   = joblib.load("domains/EIP/domain3-finemotor-model.pkl")
+    social_skills_model   = joblib.load("domains/EIP/domain4-socialskills-model.pkl")
 except FileNotFoundError:
     raise RuntimeError("Model file not found.")
 
@@ -31,15 +31,15 @@ def predict(request: PredictProgress):
         
         # Process each domain individually
         for domain, evaluations in request.domains.items():
-            input_data = np.array(evaluations).reshape(1, 2)  # Convert list to np.array
-            if domain == "Domain_1":
-                prediction = domain1.predict(input_data)
-            elif domain == "Domain_2":
-                prediction = domain2.predict(input_data)
-            elif domain == "Domain_3":
-                prediction = domain3.predict(input_data)
-            elif domain == "Domain_4":
-                prediction = domain4.predict(input_data)
+            input_data = np.array(evaluations).reshape(1, 3)  # Convert list to np.array
+            if domain == "Literacy":
+                prediction = literacy_model.predict(input_data)
+            elif domain == "Numeracy":
+                prediction = numeracy_model.predict(input_data)
+            elif domain == "Fine Motor":
+                prediction = fine_motor_model.predict(input_data)
+            elif domain == "Social Skills":
+                prediction = social_skills_model.predict(input_data)
             predictions[domain] = int(prediction[0])
         
         return {"predictions": predictions}
