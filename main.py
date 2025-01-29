@@ -10,10 +10,10 @@ app = FastAPI()
 
 # Load your model
 try:
-    literacy_model  = joblib.load("domains/EIP/domain1-literacy-model.pkl")
-    numeracy_model  = joblib.load("domains/EIP/domain2-numeracy-model.pkl")
-    fine_motor_model   = joblib.load("domains/EIP/domain3-finemotor-model.pkl")
-    social_skills_model   = joblib.load("domains/EIP/domain4-socialskills-model.pkl")
+    literacy_model  = joblib.load("app/domains/EIP/domain1-literacy-model.pkl")
+    numeracy_model  = joblib.load("app/domains/EIP/domain2-numeracy-model.pkl")
+    fine_motor_model   = joblib.load("app/domains/EIP/domain3-finemotor-model.pkl")
+    social_skills_model   = joblib.load("app/domains/EIP/domain4-socialskills-model.pkl")
 except FileNotFoundError:
     raise RuntimeError("Model file not found.")
 
